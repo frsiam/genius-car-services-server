@@ -22,9 +22,8 @@ function verifyJWT(req, res, next) {
         }
         console.log('decoded', decoded);
         req.decoded = decoded;
+        next();
     })
-    // console.log('inside verifyjwt function', authHeader);
-    next();
 }
 
 
@@ -72,6 +71,7 @@ async function run() {
             const result = await serviceCollection.deleteOne(query);
             res.send(result);
         })
+
         // order collection api
 
         app.get('/orders', verifyJWT, async (req, res) => {
